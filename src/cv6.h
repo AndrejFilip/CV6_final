@@ -17,6 +17,7 @@ void RegisterCallbackUART2(void *callback);
 void USART2_IRQHandler(void);
 double konverzia();
 void stav(int);
+void send();
 
 
 #endif /* CV6_H_ */

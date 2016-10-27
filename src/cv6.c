@@ -123,8 +123,8 @@ void initUSART2(void)   /// usart 1
       NVIC_InitStructure.NVIC_IRQChannelCmd = ENABLE;
       NVIC_Init(&NVIC_InitStructure);
       //choosing which event should cause interrupt
-      USART_ITConfig(USART2, USART_IT_RXNE, ENABLE);
-
+    //  USART_ITConfig(USART2, USART_IT_RXNE, ENABLE);
+      USART_ITConfig(USART2, USART_IT_TXE, ENABLE);   // menim bit
 
       // Enable USART
       USART_Cmd(USART2, ENABLE);
@@ -158,7 +158,7 @@ void RegisterCallbackUART2(void *callback){
 
 double pom1 = 0;
 int pom2 = 0;
-void USART2_IRQHandler(void)  //USART1_IRQHandler
+/*void USART2_IRQHandler(void)  //USART1_IRQHandler
 {
     uint16_t pom = 0;
         if(USART_GetITStatus(USART2, USART_IT_RXNE) != RESET)
@@ -171,6 +171,32 @@ void USART2_IRQHandler(void)  //USART1_IRQHandler
 
             }
         }
+}*/
+
+int i =0;
+int dlzka=0;
+char znak[];
+void send()
+{
+	char value1[10] = "ABCD";
+		sprintf(znak,"%s",value1);
+	    dlzka=strlen(znak); // osetrenie
+}
+void USART2_IRQHandler(void)  //USART1_IRQHandler
+{
+	if(i<dlzka) // osetrenie
+	{
+			if (USART_GetFlagStatus(USART2, USART_FLAG_TC) != RESET)
+			{
+					if (USART_GetFlagStatus(USART2, USART_FLAG_TXE) != RESET)
+					{
+						 USART_SendData(USART2,znak[i]);
+						 USART_ClearITPendingBit(USART2, USART_FLAG_TXE);
+						 i++;
+						 USART_GetFlagStatus(USART2, USART_FLAG_TXE) == RESET;
+					}
+			}
+	}
 }
 
 

@@ -50,6 +50,7 @@ extern  uint16_t value;
 */
 int main(void)
 {
+	send();
   int i = 0;
   init_adc();
   initUSART2();
@@ -62,9 +63,10 @@ int main(void)
 
 
 
+
   while (1)
   {
-	  RegisterCallbackUART2(stav);
+	 // RegisterCallbackUART2(stav);
 	i++;
   }
   return 0;
