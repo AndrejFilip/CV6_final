@@ -10,6 +10,13 @@
 void init_adc(void);
 void init_NVIC(void);
 void ADC1_IRQHandler(void);
+void initUSART2(void);
+void PutcUART2(char);
+void putC(char []);
+void RegisterCallbackUART2(void *callback);
+void USART2_IRQHandler(void);
+double konverzia();
+void stav(int);
 
 
 #endif /* CV6_H_ */

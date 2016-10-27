@@ -52,6 +52,7 @@ int main(void)
 {
   int i = 0;
   init_adc();
+  initUSART2();
 
 
 
@@ -63,6 +64,7 @@ int main(void)
 
   while (1)
   {
+	  RegisterCallbackUART2(stav);
 	i++;
   }
   return 0;
